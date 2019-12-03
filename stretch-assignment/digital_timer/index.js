@@ -1,10 +1,16 @@
 var startTime;
+var intervalTimer;
+var muhButtonDiv = document.createElement('div');
+muhButtonDiv.style.flexDirection = 'column';
+// body.style.flexDirection = 'column';
 var muhButton = document.createElement('button');
+muhButton.innerText = 'Be Vin Diesel!';
 muhButton.onclick=function(){
     startTimer();
 };
 document.addEventListener('DOMContentLoaded', function(){
-    document.body.appendChild(muhButton);
+    muhButtonDiv.appendChild(muhButton);
+    document.body.appendChild(muhButtonDiv);
 });
 
 function incrementTimer(){
@@ -16,16 +22,27 @@ function incrementTimer(){
     document.getElementById('msTens').innerHTML = arrDiff.pop();
     document.getElementById('msHundreds').innerHTML = arrDiff.pop();
     document.getElementById('secondOnes').innerHTML = arrDiff.pop();
-    document.getElementById('secondTens').innerHTML = arrDiff.pop();
-    
+    let secondTens = arrDiff.pop();
+    document.getElementById('secondTens').innerHTML = secondTens;
+    if (secondTens === '1'){
+        clearInterval(intervalTimer);
+        document.querySelectorAll('.digit').forEach(element => {
+            element.style.color= 'red';
+        });
+    }
     // console.log(sDiff);
 }
 
 function startTimer(){
     startTime = +new Date();
-    setInterval (() => {
+    intervalTimer = setInterval (() => {
         incrementTimer();
     } ,10);
+    document.querySelectorAll('.digit').forEach(element => {
+        element.style.color= 'black';
+    });
+
+
 }
 
 
